@@ -1,0 +1,30 @@
+timeout: 15
+remember_last_entry: yes
+
+interface_branding:
+
+base,red,green,yellow,blue,pink,teal,texrt
+
+term_palette: 191724;eb6f92;31748f;f6c177;9ccfd8;c4a7e7;ebbcba;e0def4
+term_palette_bright: 2a273f;eb6f92;31748f;f6c177;9ccfd8;c4a7e7;ebbcba;e0def4
+term_background: 191724
+term_foreground: e0def4
+term_background_bright: 2a273f
+term_foreground_bright: e0def4
+
+/Arch Linux (CachyOS)
+    protocol: linux
+    path: guid(008d4843-1a6e-41c9-ac67-ec46e3049d38):/vmlinuz-linux-cachyos
+    cmdline: root=UUID=f5ace4c1-84ec-410c-b105-baac627df4bf rootflags=subvol=@ rw 
+    module_path: guid(008d4843-1a6e-41c9-ac67-ec46e3049d38):/initramfs-linux-cachyos.img
+
+/Windows 11
+    protocol: efi
+    path: guid(91a14157-8543-401c-9075-32d71a2dedb5):/EFI/Microsoft/Boot/bootmgfw.efi
+
+/Extras
+    //Arch Linux (LTS)
+        protocol: linux
+        path: guid(008d4843-1a6e-41c9-ac67-ec46e3049d38):/vmlinuz-linux-lts
+        cmdline: root=UUID=f5ace4c1-84ec-410c-b105-baac627df4bf rootflags=subvol=@ rw 
+        module_path: guid(008d4843-1a6e-41c9-ac67-ec46e3049d38):/initramfs-linux-lts.img

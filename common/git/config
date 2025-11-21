@@ -1,0 +1,14 @@
+[user]
+	name = Eduardo
+	email = eduardo.costa.xyz@gmail.com
+[core]
+	editor = nvim
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
