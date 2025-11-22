@@ -70,10 +70,6 @@ overview {
     zoom 0.4
 }
 
-clipboard {
-    disable-primary
-}
-
 hotkey-overlay {
     skip-at-startup
     hide-not-bound
@@ -92,6 +88,8 @@ spawn-at-startup "mako"
 spawn-at-startup "waybar"
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
+spawn-sh-at-startup "swaybg -i ~/files/pictures/wallpapers/mori.jpg"
 
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'"
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"

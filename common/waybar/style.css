@@ -11,25 +11,25 @@ window#waybar {
 }
 
 /* Left-most: Arch icon */
-#custom-appmenu {
-  font-size: 4;
-  background-image: url('/usr/share/icons/cachyos.svg');
-  background-color: #1e222a;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding: 0px 12px;
-    
-}
+/* #custom-appmenu { */
+/*   font-size: 4; */
+/*   background-image: url('/usr/share/icons/cachyos.svg'); */
+/*   background-color: #1e222a; */
+/*   background-position: center; */
+/*   background-repeat: no-repeat; */
+/*   background-size: contain; */
+/*   padding: 0px 12px; */
+/**/
+/* } */
 
 /* Right-most: Clock */
-#clock {
-    font-size: 14px;
-    background-color: #1e222a;
-    color: #c0c0c0;
-    border-radius: 0px;
-    padding: 0px 8px;
-}
+/* #clock { */
+/*     font-size: 14px; */
+/*     background-color: #1e222a; */
+/*     color: #c0c0c0; */
+/*     border-radius: 0px; */
+/*     padding: 0px 8px; */
+/* } */
 
 /* Active window title */
 #window {
@@ -96,10 +96,11 @@ tooltip {
 
 /* All system info modules */
 #backlight,
-#pulseaudio,
+#wireplumber,
 #network,
 #bluetooth,
 #battery,
+#clock,
 #tray,
 #custom-updates,
 #custom-notification {

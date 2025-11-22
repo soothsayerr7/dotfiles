@@ -6,6 +6,13 @@ function M.keymap(desc_arg, lhs_arg, rhs_arg, mode_arg)
   return { lhs_arg, rhs_arg, mode_arg, desc = desc_arg }
 end
 
+function M.flash(msg, duration)
+  vim.api.nvim_echo({ { msg, 'None' } }, false, {})
+  vim.defer_fn(function()
+    vim.api.nvim_echo({}, false, {})
+  end, duration or 1500)
+end
+
 function M.pwsh()
   local o = vim.o
   if vim.fn.executable('pwsh') == 1 then

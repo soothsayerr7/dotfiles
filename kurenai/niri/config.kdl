@@ -86,10 +86,6 @@ overview {
     zoom 0.4
 }
 
-clipboard {
-    disable-primary
-}
-
 hotkey-overlay {
     skip-at-startup
     hide-not-bound
