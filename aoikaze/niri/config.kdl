@@ -94,7 +94,7 @@ spawn-sh-at-startup "swaybg -i ~/files/pictures/wallpapers/mori.jpg"
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'"
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
 
-// prefer-no-csd
+prefer-no-csd
 
 screenshot-path "~/files/pictures/screenshots/%Y-%m-%d %H-%M-%S.png"
 
