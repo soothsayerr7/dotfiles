@@ -1,0 +1,8 @@
+require('config/env')
+require('config/monitors')
+require('config/start')
+require('config/general')
+require('config/theme')
+require('config/animations')
+require('config/rules')
+require('config/keybinds')

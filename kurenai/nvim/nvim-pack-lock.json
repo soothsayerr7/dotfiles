@@ -1,0 +1,24 @@
+{
+  "plugins": {
+    "mini-icons": {
+      "rev": "bac6317300e205335df425296570d84322730067",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.icons": {
+      "rev": "bac6317300e205335df425296570d84322730067",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "oil": {
+      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "oil.nvim": {
+      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "rose-pine": {
+      "rev": "9504524e5ed0e326534698f637f9d038ba4cd0ee",
+      "src": "https://github.com/rose-pine/neovim"
+    }
+  }
+}

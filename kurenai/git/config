@@ -1,0 +1,9 @@
+[user]
+	name = Eduardo
+	email = eduardo.costa.xyz@gmail.com
+[core]
+	editor = nvim
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
