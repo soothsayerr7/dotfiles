@@ -4,6 +4,8 @@ set -x XDG_CACHE_HOME "$HOME/.cache"
 
 set -x EDITOR nvim
 
+command -q zoxide; and zoxide init fish | source
+
 set -g fish_color_normal e0def4
 set -g fish_color_command c4a7e7
 set -g fish_color_keyword 9ccfd8
