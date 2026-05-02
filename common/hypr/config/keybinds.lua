@@ -27,7 +27,6 @@ local function noctalia(cmd)
   return d.exec_cmd('qs -c noctalia-shell ipc call ' .. cmd)
 end
 
--- b(SU .. 'Space', noctalia('launcher toggle'))
 b(SU .. 'Space', d.exec_cmd('hyprlauncher'))
 b(SU .. 'V',     noctalia('launcher clipboard'))
 
@@ -53,6 +52,7 @@ b(SS .. 'A', dw.pin())
 
 b(SU .. 'X', dw.cycle_next())
 
+b(SU .. 'F', d.layout('colresize 1.0'))
 b(SS .. 'F', dw.fullscreen())
 
 b(SU .. 'S', dws.toggle_special())
@@ -66,8 +66,7 @@ b(SU .. 'B', dw.toggle_swallow())
 
 b(SU .. 'C', d.layout('fit all'))
 
-b(SU .. 'R', d.layout('colresize 1.0'))
-b(SS .. 'R', d.layout('colresize 0.5'))
+b(SU .. 'R', d.layout('colresize -conf'))
 
 b(SU .. 'equal', d.layout('colresize +0.1'))
 b(SU .. 'minus', d.layout('colresize -0.1'))
