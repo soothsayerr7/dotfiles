@@ -19,9 +19,11 @@ ensure_installed() {
 }
 
 setup_dots() {
+if [[ ! -f "$dfm_dir/dfm.sh" ]]; then
   mkdir -p "$dfm_dir"
   cp -p "$0" "$dfm_dir"
   rm "$0"
+fi
 }
 
 sync_dots() {
