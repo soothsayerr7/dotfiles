@@ -1,7 +1,7 @@
 function cd
-    if command -q zoxide
-        z $argv
-    else
-        builtin cd
-    end
+  if command -q zoxide
+    z $argv
+  else
+    builtin cd
+  end
 end
