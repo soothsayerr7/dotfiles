@@ -11,8 +11,9 @@ pkgs_git=(
 )
 
 pkgs_common=(
-  wezterm nautilus nautilus-open-any-terminal helium-browser-bin
+  mesa vulkan-radeon
   gtk3 gtk4 qt5-wayland qt6-wayland adw-gtk-theme qt6ct
+  wezterm nautilus nautilus-open-any-terminal helium-browser-bin
   xdg-user-dirs xdg-desktop-portal-gtk
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
   noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ttf-nerd-fonts-symbols
