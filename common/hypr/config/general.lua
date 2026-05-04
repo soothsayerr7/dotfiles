@@ -103,6 +103,6 @@ hl.config({
     wrap_focus   = false,
     wrap_swapcol = false,
 
-    explicit_column_widths = '0.333, 0.5',
+    explicit_column_widths = '0.33333, 0.5',
   },
 })

@@ -24,3 +24,5 @@ for i = 1, 9 do
 end
 
 wr({ workspace = 'r[11-19]', layout_opts = { direction = 'down' } })
+
+hl.window_rule({ match = { workspace = 'r[11-19]' }, scrolling_width = 0.33333 })
