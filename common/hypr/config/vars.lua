@@ -1,5 +1,9 @@
 local M = {}
 
+local handle = io.popen('hostnamectl hostname')
+M.hostname = handle:read('*a'):gsub('%s+', '')
+handle:close()
+
 M.terminal       = 'wezterm'
 M.terminal_class = 'org.wezfurlong.wezterm'
 
