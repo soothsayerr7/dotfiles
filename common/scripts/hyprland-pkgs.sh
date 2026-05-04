@@ -38,3 +38,6 @@ elif [[ "$choice" == '2' ]]; then
 fi
 
 $helper -S "${pkgs[@]}"
+
+mkdir -p ~/downloads ~/documents ~/pictures ~/videos
+xdg-user-dirs-update

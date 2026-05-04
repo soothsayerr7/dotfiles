@@ -4,18 +4,19 @@ set -euo pipefail
 
 script_name=$(basename "$0")
 
-if [[ -z "$1" ]]; then
+if [[ $# -eq 0 ]]; then
   echo "Usage: $script_name <hostname> <cpu>"
   echo "Example: $script_name arch amd"
   exit 1
 fi
 
-pacman -S limine efibootmgr ${cpu}-ucode git btrfs-progs networkmanager man-db terminus-font
-
 hostname="$1"
+cpu="$2"
 username='ryo'
 locale='en_GB.UTF-8'
 timezone='America/Fortaleza'
+
+pacman -S limine efibootmgr ${cpu}-ucode git btrfs-progs networkmanager man-db terminus-font
 
 ln -sf /usr/share/zoneinfo/${timezone} /etc/localtime
 hwclock --systohc

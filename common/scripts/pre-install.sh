@@ -4,7 +4,7 @@ set -euo pipefail
 
 script_name=$(basename "$0")
 
-if [ -z "$1" ]; then
+if [[ $# -eq 0 ]]; then
   echo "Usage: $script_name <device>"
   echo "Example: $script_name /dev/nvme0n1"
   exit 1
