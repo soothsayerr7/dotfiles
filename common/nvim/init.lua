@@ -18,6 +18,9 @@ opt.smartindent = true
 opt.scrolloff = 8
 opt.wrap = false
 
+opt.swapfile = false
+opt.undofile = true
+
 opt.clipboard = 'unnamedplus'
 
 local keymap = vim.keymap.set

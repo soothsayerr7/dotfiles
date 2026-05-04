@@ -1,6 +1,8 @@
 -- VARIABLES
 local vars = require('config/vars')
 
+local scripts_dir = '$HOME/.config/hypr/scripts/'
+
 local b  = hl.bind
 
 local d   = hl.dsp
@@ -30,6 +32,8 @@ end
 b(SU .. 'Space', d.exec_cmd('hyprlauncher'))
 b(SU .. 'V',     noctalia('launcher clipboard'))
 
+b(SU .. 'B',     noctalia('bar toggle'))
+
 b(SS .. 'Q', noctalia('sessionMenu toggle'))
 
 b('XF86AudioRaiseVolume', noctalia('volume increase'),   flags.el)
@@ -53,7 +57,7 @@ b(SS .. 'A', dw.pin())
 b(SU .. 'X', dw.cycle_next())
 
 b(SU .. 'F', d.layout('colresize 1.0'))
-b(SS .. 'F', dw.fullscreen())
+b(SS .. 'F', d.exec_cmd(scripts_dir .. 'hypr-fullscreen-toggle.sh'))
 
 b(SU .. 'S', dws.toggle_special())
 b(SS .. 'S', dw.move({ workspace = 'special' }))
@@ -62,7 +66,7 @@ b(SS .. 'G', dg.toggle())
 b(SU .. 'G', dg.next())
 b(SX .. 'G', dg.lock())
 
-b(SU .. 'B', dw.toggle_swallow())
+b(SU .. 'N', dw.toggle_swallow())
 
 b(SU .. 'C', d.layout('fit all'))
 
