@@ -1,5 +1,3 @@
-local vars = require('config/vars')
-
 hl.config({
   general = {
     border_size = 2,

@@ -1,3 +1,5 @@
+vars = require('config/vars')
+
 require('config/env')
 require('config/monitors')
 require('config/start')

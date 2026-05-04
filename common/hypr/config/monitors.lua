@@ -1,5 +1,3 @@
-local vars = require('config/vars')
-
 if vars.hostname == 'kurenai' then
   hl.monitor({
     output = 'DP-1',

@@ -1,8 +1,4 @@
 -- VARIABLES
-local vars = require('config/vars')
-
-local scripts_dir = '$HOME/.config/hypr/scripts/'
-
 local b  = hl.bind
 
 local d   = hl.dsp
@@ -24,6 +20,10 @@ local flags = {
   m  = { mouse = true },
 }
 
+local function exec_script(script)
+  return d.exec_cmd('$HOME/.config/hypr/scripts/' .. script)
+end
+
 -- NOCTALIA
 local function noctalia(cmd)
   return d.exec_cmd('qs -c noctalia-shell ipc call ' .. cmd)
@@ -32,7 +32,7 @@ end
 b(SU .. 'Space', d.exec_cmd('hyprlauncher'))
 b(SU .. 'V',     noctalia('launcher clipboard'))
 
-b(SU .. 'B',     noctalia('bar toggle'))
+b(SU .. 'B', noctalia('bar toggle'))
 
 b(SS .. 'Q', noctalia('sessionMenu toggle'))
 
@@ -57,7 +57,7 @@ b(SS .. 'A', dw.pin())
 b(SU .. 'X', dw.cycle_next())
 
 b(SU .. 'F', d.layout('colresize 1.0'))
-b(SS .. 'F', d.exec_cmd(scripts_dir .. 'hypr-fullscreen-toggle.sh'))
+b(SS .. 'F', exec_script('hypr-fullscreen-toggle.sh'))
 
 b(SU .. 'S', dws.toggle_special())
 b(SS .. 'S', dw.move({ workspace = 'special' }))
@@ -89,7 +89,7 @@ local axes = {
 for axis, map in pairs(axes) do
   for key, dir in pairs(map) do
     b(SU .. key, d.layout('focus ' .. dir))
-    b(SC .. key, d.exec_cmd('~/.config/hypr/scripts/hypr-swap.sh ' .. dir))
+    b(SC .. key, exec_script('hypr-swap.sh ' .. dir))
 
     if axis == 'h' then
       b(SS .. key, d.focus({ monitor = dir }))
@@ -97,17 +97,17 @@ for axis, map in pairs(axes) do
     end
 
     if axis == 'v' then
-      b(SS .. key, d.exec_cmd('~/.config/hypr/scripts/hypr-workspace.sh focus ' .. dir))
-      b(SX .. key, d.exec_cmd('~/.config/hypr/scripts/hypr-workspace.sh move ' .. dir))
+      b(SS .. key, exec_script('hypr-workspace.sh focus ' .. dir))
+      b(SX .. key, exec_script('hypr-workspace.sh move ' .. dir))
     end
   end
 end
 
-b(SU .. 'comma',  d.exec_cmd('~/.config/hypr/scripts/hypr-move.sh b'))
-b(SU .. 'period', d.exec_cmd('~/.config/hypr/scripts/hypr-move.sh f'))
+b(SU .. 'comma',  exec_script('hypr-move.sh b'))
+b(SU .. 'period', exec_script('hypr-move.sh f'))
 
-b(SS .. 'comma',  d.exec_cmd('~/.config/hypr/scripts/hypr-consume.sh f'))
-b(SS .. 'period', d.exec_cmd('~/.config/hypr/scripts/hypr-consume.sh b'))
+b(SS .. 'comma',  exec_script('hypr-consume.sh f'))
+b(SS .. 'period', exec_script('hypr-consume.sh b'))
 
 -- NUMBERED MOVEMENT
 for i = 1, 9 do
