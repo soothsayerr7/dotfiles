@@ -11,8 +11,7 @@ pkgs_git=(
 )
 
 pkgs_common=(
-  mesa-git lib32-mesa-git
-  gtk3 gtk4 qt5-wayland qt6-wayland adw-gtk-theme qt6ct
+  mesa-git gtk3 gtk4 qt5-wayland qt6-wayland adw-gtk-theme qt6ct
   wezterm nautilus nautilus-open-any-terminal helium-browser-bin
   xdg-user-dirs xdg-desktop-portal-gtk
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber

@@ -13,7 +13,6 @@ fi
 hostname="$1"
 cpu="$2"
 username='ryo'
-locale='en_GB.UTF-8'
 timezone='America/Fortaleza'
 
 pacman -S limine efibootmgr ${cpu}-ucode git btrfs-progs networkmanager man-db terminus-font
@@ -21,9 +20,17 @@ pacman -S limine efibootmgr ${cpu}-ucode git btrfs-progs networkmanager man-db t
 ln -sf /usr/share/zoneinfo/${timezone} /etc/localtime
 hwclock --systohc
 
-sed -i "/^#${locale}/s/^#//" /etc/locale.gen
+for locale in en_IE.UTF-8 en_DK.UTF-8 en_US.UTF-8; do
+  sed -i "/^#${locale}/s/^#//" /etc/locale.gen
+done
+
 locale-gen
-echo "LANG=${locale}" > /etc/locale.conf
+
+cat <<EOF > /etc/locale.conf
+LANG=en_IE.UTF-8
+LC_TIME=en_DK.UTF-8
+LC_MESSAGES=en_US.UTF-8
+EOF
 
 cat <<EOF > /etc/vconsole.conf
 KEYMAP=us
