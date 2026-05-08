@@ -78,6 +78,8 @@ b(SU .. 'minus', d.layout('colresize -0.1'))
 b(SU .. 'mouse:272', dw.drag(),   flags.m)
 b(SU .. 'mouse:273', dw.resize(), flags.m)
 
+b(SU .. 'P', d.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+
 b(SY .. 'delete', d.exit())
 
 -- DIRECTIONAL MOVEMENT

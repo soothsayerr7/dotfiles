@@ -16,7 +16,7 @@ pkgs_common=(
   xdg-user-dirs xdg-desktop-portal-gtk
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
   inter-font noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ttf-nerd-fonts-symbols
-  wl-clipboard cliphist jq
+  wl-clipboard cliphist jq grim slurp
 )
 
 if command -v paru &> /dev/null; then
