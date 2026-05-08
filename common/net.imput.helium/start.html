@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start</title>
+    <style>
+      :root {
+        --bg-color: #191724;
+        --text-color: #e0def4;
+        --accent-color: #c4a7e7;
+        --c1: #eb6f92;
+        --c2: #f6c177;
+        --c3: #ebbcba;
+        --c4: #31748f;
+        --c5: #9ccfd8;
+        --font-main: "Inter", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: var(--font-main);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .bookmarks {
+        position: absolute;
+        top: 40px;
+        display: flex;
+        gap: 25px;
+        list-style: none;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .bookmark-item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--accent-color);
+        font-size: 0.9rem;
+        transition: opacity 0.2s ease;
+        letter-spacing: 0.5px;
+      }
+
+      .bookmark-item:hover {
+        opacity: 0.7;
+      }
+
+      .bookmarks li:nth-child(5n+1) .dot {
+        background-color: var(--c1);
+      }
+
+      .bookmarks li:nth-child(5n+2) .dot {
+        background-color: var(--c2);
+      }
+
+      .bookmarks li:nth-child(5n+3) .dot {
+        background-color: var(--c3);
+      }
+
+      .bookmarks li:nth-child(5n+4) .dot {
+        background-color: var(--c4);
+      }
+
+      .bookmarks li:nth-child(5n+5) .dot {
+        background-color: var(--c5);
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 10px;
+        display: inline-block;
+      }
+
+      .content {
+        text-align: center;
+      }
+
+      .content h1 {
+        font-weight: 300;
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+        margin-bottom: 10px;
+      }
+
+      .content p {
+        color: var(--accent-color);
+        font-size: 1.1rem;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul class="bookmarks">
+        <li>
+          <a href="https://google.com" class="bookmark-item">
+            <span class="dot"></span>Google</a>
+        </li>
+        <li>
+          <a href="https://youtube.com" class="bookmark-item">
+            <span class="dot"></span>Youtube</a>
+        </li>
+        <li>
+          <a href="https://www.twitch.tv/directory" class="bookmark-item">
+            <span class="dot"></span>Twitch</a>
+        </li>
+        <li>
+          <a href="https://gemini.google.com/app" class="bookmark-item">
+            <span class="dot"></span>Gemini</a>
+        </li>
+        <li>
+          <a href="https://web.telegram.org/k" class="bookmark-item">
+            <span class="dot"></span>Telegram</a>
+        </li>
+      </ul>
+    </nav>
+    <main class="content">
+      <h1>Stay focused.</h1>
+      <p>The day is yours to design.</p>
+    </main>
+  </body>
+</html>

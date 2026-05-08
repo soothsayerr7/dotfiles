@@ -15,7 +15,7 @@ pkgs_common=(
   wezterm nautilus nautilus-open-any-terminal helium-browser-bin
   xdg-user-dirs xdg-desktop-portal-gtk
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
-  noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ttf-nerd-fonts-symbols
+  inter-font noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ttf-nerd-fonts-symbols
   wl-clipboard cliphist jq
 )
 
