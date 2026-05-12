@@ -30,8 +30,10 @@ wipefs -a "$target_dev"
 
 parted -s "$target_dev" mklabel gpt
 
-parted -s "$target_dev" mkpart "ARCHBOOT" fat32 1MiB 1537MiB
+parted -s "$target_dev" mkpart "ARCHEFI" fat32 1MiB 513MiB
 parted -s "$target_dev" set 1 esp on
+
+parted -s "$target_dev" mkpart "ARCHBOOT" fat32 513MiB 1537MiB
 
 parted -s "$target_dev" mkpart "ARCH" btrfs 1537MiB 953857MiB
 
@@ -48,9 +50,11 @@ get_part() {
   fi
 }
 
-boot_part=$(get_part "$target_dev" 1) 
-root_part=$(get_part "$target_dev" 2) 
+efi_part=$(get_part "$target_dev" 1) 
+boot_part=$(get_part "$target_dev" 2) 
+root_part=$(get_part "$target_dev" 3) 
 
+mkfs.fat -F 32 -n ARCHEFI "$efi_part"
 mkfs.fat -F 32 -n ARCHBOOT "$boot_part"
 mkfs.btrfs -f -L ARCH "$root_part"
 
@@ -77,3 +81,7 @@ mount -o noatime,compress=zstd,subvol=@machines "$root_part" /mnt/var/lib/machin
 mount -o noatime,compress=zstd,subvol=@portables "$root_part" /mnt/var/lib/portables
 
 mount "$boot_part" /mnt/boot
+
+mkdir -p /mnt/boot/efi
+
+mount "$efi_part" /mnt/boot/efi

@@ -13,8 +13,8 @@ fi
 taget_dev="$1"
 part_num="$2"
 
-mkdir -p /boot/EFI/limine /boot/limine
-cp /usr/share/limine/BOOTX64.EFI /boot/EFI/limine
+mkdir -p /boot/efi/EFI/limine /boot/limine
+cp /usr/share/limine/BOOTX64.EFI /boot/efi/EFI/limine
 
 efibootmgr \
   --create \
@@ -25,6 +25,11 @@ efibootmgr \
   --unicode
 
 root_uuid=$(findmnt -no UUID /)
+
+lsblk -o name,label,partuuid
+read -p 'BOOT PARTUUID: ' bootuuid
+
+read -p 'Kernel: ' kernel
 
 read -p 'Resolution (<width>x<height>): ' resolution
 
@@ -45,9 +50,9 @@ term_foreground_bright: e0def4
 
 /Arch Linux (CachyOS)
     protocol: linux
-    path: boot():/vmlinuz-linux-cachyos-bore
+    path: guid(${bootuuid}):/vmlinuz-linux-${kernel}
     cmdline: root=UUID=${root_uuid} rootflags=subvol=@ rw 
-    module_path: boot():/initramfs-linux-cachyos-bore.img
+    module_path: guid(${bootuuid}):/initramfs-linux-${kernel}.img
 
 EOF
 
@@ -55,12 +60,12 @@ read -p 'Add entry for Windows? [y/N]: ' confirm
 
 if [[ "$confirm" =~ ^[Yy]([Ee][Ss])?$ ]]; then
   lsblk -o name,label,partuuid
-  read -p 'Windows EFI PARTUUID: ' partuuid
+  read -p 'Windows EFI PARTUUID: ' winuuid
   
   cat <<EOF >> /boot/limine/limine.conf
 /Windows 11
   protocol: efi
-  path: guid(${partuuid}):/EFI/Microsoft/Boot/bootmgfw.efi
+  path: guid(${winuuid}):/EFI/Microsoft/Boot/bootmgfw.efi
 
 EOF
 fi

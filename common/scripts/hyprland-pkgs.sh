@@ -3,16 +3,17 @@
 set -euo pipefail
 
 pkgs_stable=(
-  hyprland noctalia-shell hyprqt6engine xdg-desktop-portal-hyprland hyprpolkitagent
+  hyprland noctalia hyprqt6engine xdg-desktop-portal-hyprland
 )
 
 pkgs_git=(
-  hyprland-git noctalia-shell-git hyprqt6engine-git xdg-desktop-portal-hyprland-git hyprpolkitagent-git
+  hyprland-git noctalia-git hyprqt6engine-git xdg-desktop-portal-hyprland-git
 )
 
 pkgs_common=(
-  mesa-git gtk3 gtk4 qt5-wayland qt6-wayland adw-gtk-theme qt6ct
-  wezterm nautilus nautilus-open-any-terminal helium-browser-bin
+  mesa vulkan-radeon
+  gtk3 gtk4 qt5-wayland qt6-wayland adw-gtk-theme qt6ct
+  alacritty nautilus nautilus-open-any-terminal helium-browser-bin
   xdg-user-dirs xdg-desktop-portal-gtk
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
   inter-font noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ttf-nerd-fonts-symbols

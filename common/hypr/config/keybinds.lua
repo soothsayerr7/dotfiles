@@ -25,23 +25,25 @@ local function exec_script(script)
 end
 
 -- NOCTALIA
-local function noctalia(cmd)
-  return d.exec_cmd('qs -c noctalia-shell ipc call ' .. cmd)
+local function noc_msg(cmd)
+  return d.exec_cmd('noctalia msg ' .. cmd)
 end
 
-b(SU .. 'Space', d.exec_cmd('hyprlauncher'))
-b(SU .. 'V',     noctalia('launcher clipboard'))
+local PT = 'panel-toggle '
 
-b(SU .. 'B', noctalia('bar toggle'))
+b(SU .. 'Space', noc_msg(PT .. 'launcher'))
+b(SU .. 'V',     noc_msg(PT .. 'clipboard'))
 
-b(SS .. 'Q', noctalia('sessionMenu toggle'))
+b(SU .. 'B', noc_msg('bar-toggle'))
 
-b('XF86AudioRaiseVolume', noctalia('volume increase'),   flags.el)
-b('XF86AudioLowerVolume', noctalia('volume decrease'),   flags.el)
-b('XF86AudioMute',        noctalia('volume muteOutput'), flags.l)
+b(SS .. 'Q', noc_msg(PT .. 'session'))
 
-b('XF86MonBrightnessUp',   noctalia('brightness increase'), flags.el)
-b('XF86MonBrightnessDown', noctalia('brightness decrease'), flags.el)
+b('XF86AudioRaiseVolume', noc_msg('volume-up'),   flags.el)
+b('XF86AudioLowerVolume', noc_msg('volume-down'),   flags.el)
+b('XF86AudioMute',        noc_msg('volume-mute'), flags.l)
+
+b('XF86MonBrightnessUp',   noc_msg('brightness-up'), flags.el)
+b('XF86MonBrightnessDown', noc_msg('brightness-down'), flags.el)
 
 -- PROGRAMS
 b(SU .. 'T', d.exec_cmd(vars.terminal))
