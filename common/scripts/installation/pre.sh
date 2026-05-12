@@ -2,40 +2,38 @@
 
 set -euo pipefail
 
-script_name=$(basename "$0")
+lsblk -o NAME
+read -p 'Target device (e.G. /dev/nvme0n1): ' target_dev
 
-if [[ $# -eq 0 ]]; then
-  echo "Usage: $script_name <device>"
-  echo "Example: $script_name /dev/nvme0n1"
-  exit 1
+read -p 'Wipe device? [y/N]: ' wipe
+
+if [[ "$wipe" =~ ^[Yy]([Ee][Ss])?$ ]]; then
+  wipefs -a "$target_dev"
+  parted -s "$target_dev" mklabel gpt
 fi
 
-target_dev="$1"
+parted -s "$target_dev" unit mib print
 
-if [[ ! -b "$target_dev" ]]; then
-  echo "ERROR: Device $target_dev not found."
-  exit 1
-fi
+read -p 'EFI partition number: ' efi_part_num
 
-echo "Targeting device: $target_dev."
-echo "WARNING: ALL DATA ON $target_dev WILL BE ERASED!"
-read -p 'Type YES to confirm: ' confirm
+boot_part_num=$(( efi_part_num + 1 ))
+root_part_num=$(( boot_part_num + 1 ))
 
-if [[ ! "$confirm" =~ ^[Yy]([Ee][Ss])?$ ]]; then
-  echo 'Aborting. No changes were made.'
-  exit 1
-fi
+read -p 'EFI partition start: ' efi_start
 
-wipefs -a "$target_dev"
+boot_start=$(( efi_start + 512 ))
+root_start=$(( boot_start + 1024 ))
 
-parted -s "$target_dev" mklabel gpt
+read -p 'ROOT partition size in MiB: ' root_size
 
-parted -s "$target_dev" mkpart "ARCHEFI" fat32 1MiB 513MiB
-parted -s "$target_dev" set 1 esp on
+root_end=$(( root_start + root_size ))
 
-parted -s "$target_dev" mkpart "ARCHBOOT" fat32 513MiB 1537MiB
+parted -s "$target_dev" mkpart "ARCHEFI" fat32 "${efi_start}MiB" "${boot_start}MiB"
+parted -s "$target_dev" set "$efi_part_num" esp on
 
-parted -s "$target_dev" mkpart "ARCH" btrfs 1537MiB 953857MiB
+parted -s "$target_dev" mkpart "ARCHBOOT" fat32 "${boot_start}MiB" "${root_start}MiB"
+
+parted -s "$target_dev" mkpart "ARCH" btrfs "${root_start}MiB" "${root_end}MiB"
 
 partprobe "$target_dev"
 
@@ -50,9 +48,9 @@ get_part() {
   fi
 }
 
-efi_part=$(get_part "$target_dev" 1) 
-boot_part=$(get_part "$target_dev" 2) 
-root_part=$(get_part "$target_dev" 3) 
+efi_part=$(get_part "$target_dev" "$efi_part_num") 
+boot_part=$(get_part "$target_dev" "$boot_part_num") 
+root_part=$(get_part "$target_dev" "$root_part_num") 
 
 mkfs.fat -F 32 -n ARCHEFI "$efi_part"
 mkfs.fat -F 32 -n ARCHBOOT "$boot_part"

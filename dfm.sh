@@ -43,6 +43,21 @@ edit_dots() {
   exec $editor "$dot_dir"
 }
 
+ssh_dots() {
+  local ssh_dir="$HOME/.ssh"
+
+  if [[ ! -f "${ssh_dir}/id_ed25519" ]]; then
+    echo 'ERROR: ssh keys not found!'
+    exit 1
+  fi
+
+  chmod 700 "$ssh_dir"
+  chmod 600 "${ssh_dir}/id_ed25519"
+  chmod 644 "${ssh_dir}/id_ed25519.pub"
+
+  git -C "$dfm_dir" remote set-url origin git@github.com:soothsayerr7/dotfiles.git
+}
+
 main() {
   case "${1:-}" in
     'setup')
@@ -56,9 +71,13 @@ main() {
       ensure_installed
       edit_dots
       ;;
+    'ssh')
+      ensure_installed
+      ssh_dots
+      ;;
     *)
       ensure_installed
-      echo "Usage: $script_name {sync|edit [args]|setup}"
+      echo "Usage: $script_name {sync|edit|ssh|setup}"
       exit 1
       ;;
   esac

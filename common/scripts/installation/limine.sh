@@ -2,23 +2,17 @@
 
 set -euo pipefail
 
-script_name=$(basename "$0")
+lsblk -o NAME,LABEL
 
-if [[ "$#" -lt 2 ]]; then
-  echo "Usage: $script_name <device> <partition>"
-  echo "Example: $script_name /dev/nvme0n1 1"
-  exit 1
-fi
-
-taget_dev="$1"
-part_num="$2"
+read -p 'Target device(e.G. /dev/nvme0n1): ' target_dev
+read -p 'Partition number: ' part_num
 
 mkdir -p /boot/efi/EFI/limine /boot/limine
 cp /usr/share/limine/BOOTX64.EFI /boot/efi/EFI/limine
 
 efibootmgr \
   --create \
-  --disk "$taget_dev" \
+  --disk "$target_dev" \
   --part "$part_num" \
   --label "Limine Bootloader" \
   --loader '\EFI\limine\BOOTX64.EFI' \
@@ -29,7 +23,7 @@ root_uuid=$(findmnt -no UUID /)
 lsblk -o name,label,partuuid
 read -p 'BOOT PARTUUID: ' bootuuid
 
-read -p 'Kernel: ' kernel
+read -p 'Kernel(e.G. cachyos-bore): ' kernel
 
 read -p 'Resolution (<width>x<height>): ' resolution
 

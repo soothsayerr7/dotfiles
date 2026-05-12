@@ -2,22 +2,13 @@
 
 set -euo pipefail
 
-script_name=$(basename "$0")
+read -p 'Hostname: ' hostname
+read -p 'Username: ' username
+read -p 'CPU (e.G. amd): ' cpu
 
-if [[ $# -eq 0 ]]; then
-  echo "Usage: $script_name <hostname> <cpu>"
-  echo "Example: $script_name arch amd"
-  exit 1
-fi
+pacman -S limine efibootmgr "${cpu}-ucode" git btrfs-progs networkmanager man-db terminus-font
 
-hostname="$1"
-cpu="$2"
-username='ryo'
-timezone='America/Fortaleza'
-
-pacman -S limine efibootmgr ${cpu}-ucode git btrfs-progs networkmanager man-db terminus-font
-
-ln -sf /usr/share/zoneinfo/${timezone} /etc/localtime
+ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime
 hwclock --systohc
 
 for locale in en_IE.UTF-8 en_DK.UTF-8 en_US.UTF-8; do
