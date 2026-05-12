@@ -1,4 +1,6 @@
 [window]
+opacity = 0.85
+blur = true
 padding = { x = 5 }
 
 [font]
