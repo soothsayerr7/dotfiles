@@ -1,23 +1,62 @@
+[bar.vertical]
+position = "right"
+radius = 0
+background_opacity = 0.9
+thickness = 30
+margin_ends = 6
+margin_edge = 6
+start = [ "launcher", "wallpaper", "workspaces" ]
+center = []
+end = [ "tray", "clock", "session"]
+
+[bar.horizontal]
+position = "bottom"
+radius = 0
+background_opacity = 0.9
+thickness = 30
+margin_ends = 6
+margin_edge = 6
+start = [ "launcher", "wallpaper", "workspaces" ]
+center = []
+end = [ "tray", "clock", "session"]
+
+[bar.horizontal.monitor.dp1]
+match = "DP-1"
+enabled = false
+
+[bar.horizontal.monitor.edp1]
+match = "eDP-1"
+enabled = false
+
+[bar.vertical.monitor.dp2]
+match = "DP-2"
+enabled = false
+
 [theme]
 builtin = "Rosé Pine"
 
-[bar.default]
-position = "bottom"
-background_opacity = 0.85
-margins_end = 100
-thickness = 30
-start = [ "launcher", "wallpaper", "workspaces" ]
-center = [ "clock" ]
-end = [ "tray", "session"]
-
 [wallpaper]
 directory = "~/pictures/wallpapers"
+fill_mode = "crop"
 fill_color = "#191727"
 
-[noctalia_state]
-setup_wizard_completed = true
+[wallpaper.monitor.DP-1]
+directory = "~/pictures/wallpapers/horizontal"
+
+[wallpaper.monitor.eDP-1]
+directory = "~/pictures/wallpapers/horizontal"
+
+[wallpaper.monitor.DP-2]
+directory = "~/pictures/wallpapers/vertical"
 
 [shell]
 settings_show_advanced = true
 polkit_agent = true
 font_family = "Inter"
+
+[noctalia_state]
+setup_wizard_completed = true
+
+[widget.workspaces]
+display = "name"
+

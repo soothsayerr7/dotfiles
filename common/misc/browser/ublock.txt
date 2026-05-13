@@ -1,0 +1,50 @@
+{
+  "timeStamp": 1778541774041,
+  "version": "1.70.0",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "externalLists": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.mini.txt",
+    "importedLists": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.mini.txt"
+    ],
+    "popupPanelSections": 31
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "helium-annoyances",
+    "helium-unbreak",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "easylist",
+    "easyprivacy",
+    "adguard-spyware-url",
+    "urlhaus-1",
+    "plowe-0",
+    "fanboy-cookiemonster",
+    "ublock-cookies-easylist",
+    "fanboy-social",
+    "fanboy-ai-suggestions",
+    "easylist-chat",
+    "easylist-newsletters",
+    "easylist-notifications",
+    "easylist-annoyances",
+    "ublock-annoyances",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.mini.txt"
+  ],
+  "hiddenSettings": {
+    "autoUpdateDelayAfterLaunch": 10,
+    "filterAuthorMode": true,
+    "updateAssetBypassBrowserCache": true
+  },
+  "whitelist": [
+    "chrome-extension-scheme",
+    "moz-extension-scheme"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false",
+  "userFilters": "||auth.geracloud.com.br/auth/resources/6.0.1/login/gera3/img/logo.png$image\n||auth.geracloud.com.br/auth/resources/6.0.1/login/gera3/img/background.png$image\nauth.geracloud.com.br##.login-box-msg\n\nsubella.geracloud.com.br##div.ng-star-inserted.row.form-group:nth-of-type(4)\nsubella.geracloud.com.br##div.ng-star-inserted.row.form-group:nth-of-type(6)\nsubella.geracloud.com.br##div.ng-star-inserted.row.form-group:nth-of-type(7)\nsubella.geracloud.com.br##div.ng-star-inserted.row.form-group:nth-of-type(8)"
+}
