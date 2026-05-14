@@ -5,8 +5,9 @@ background_opacity = 0.9
 thickness = 30
 margin_ends = 6
 margin_edge = 6
-start = [ "launcher", "wallpaper", "workspaces" ]
-center = []
+widget_spacing = 12
+start = [ "launcher", "wallpaper", "workspaces", "taskbar" ]
+center = [ ]
 end = [ "tray", "clock", "session"]
 
 [bar.horizontal]
@@ -16,8 +17,9 @@ background_opacity = 0.9
 thickness = 30
 margin_ends = 6
 margin_edge = 6
-start = [ "launcher", "wallpaper", "workspaces" ]
-center = []
+widget_spacing = 12
+start = [ "launcher", "wallpaper", "workspaces", "taskbar" ]
+center = [ ]
 end = [ "tray", "clock", "session"]
 
 [bar.horizontal.monitor.dp1]
@@ -57,6 +59,8 @@ font_family = "Inter"
 [noctalia_state]
 setup_wizard_completed = true
 
+[widget.launcher]
+glyph = "menu-2"
+
 [widget.workspaces]
 display = "name"
-

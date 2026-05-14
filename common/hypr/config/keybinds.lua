@@ -3,8 +3,8 @@ local b  = hl.bind
 
 local d   = hl.dsp
 local dw  = hl.dsp.window
-local dg  = hl.dsp.group
 local dws = hl.dsp.workspace
+local dg  = hl.dsp.group
 
 local SU = 'SUPER + '
 local SS = 'SUPER + SHIFT + '
@@ -21,7 +21,7 @@ local flags = {
 }
 
 local function exec_script(script)
-  return d.exec_cmd('$HOME/.config/hypr/scripts/' .. script)
+  return d.exec_cmd(vars.hypr_dir .. 'scripts/' .. script)
 end
 
 -- NOCTALIA
@@ -59,7 +59,7 @@ b(SS .. 'A', dw.pin())
 b(SU .. 'X', dw.cycle_next())
 
 b(SU .. 'F', d.layout('colresize 1.0'))
-b(SS .. 'F', exec_script('hypr-fullscreen-toggle.sh'))
+b(SS .. 'F', dw.fullscreen())
 
 b(SU .. 'S', dws.toggle_special())
 b(SS .. 'S', dw.move({ workspace = 'special' }))
@@ -80,9 +80,24 @@ b(SU .. 'minus', d.layout('colresize -0.1'))
 b(SU .. 'mouse:272', dw.drag(),   flags.m)
 b(SU .. 'mouse:273', dw.resize(), flags.m)
 
-b(SU .. 'P', d.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
-
 b(SY .. 'delete', d.exit())
+
+-- SCREENSHOTS
+local function hyprshot(mode)
+  if mode == 'all' then
+    return d.exec_cmd('grim - | wl-copy')
+  else
+    return d.exec_cmd('hyprshot -z -s --clipboard-only -m ' .. mode)
+  end
+end
+
+b(SU .. 'P', hyprshot('region'))
+b(SS .. 'P', hyprshot('window'))
+b(SC .. 'P', hyprshot('output'))
+b(SX .. 'P', hyprshot('all'))
+
+local screenshot_fmt = 'screenshot_$(date +%Y-%m-%d_%H-%M-%S).png'
+b(SA .. 'P', d.exec_cmd('wl-paste > ' .. vars.screenshot_dir .. screenshot_fmt))
 
 -- DIRECTIONAL MOVEMENT
 local axes = {
@@ -107,11 +122,8 @@ for axis, map in pairs(axes) do
   end
 end
 
-b(SU .. 'comma',  exec_script('hypr-move.sh b'))
-b(SU .. 'period', exec_script('hypr-move.sh f'))
-
-b(SS .. 'comma',  exec_script('hypr-consume.sh f'))
-b(SS .. 'period', exec_script('hypr-consume.sh b'))
+b(SU .. 'comma',  d.layout('consume_or_expel prev'))
+b(SU .. 'period', d.layout('consume_or_expel next'))
 
 -- NUMBERED MOVEMENT
 for i = 1, 9 do

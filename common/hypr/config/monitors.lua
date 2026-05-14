@@ -4,6 +4,7 @@ if vars.hostname == 'kurenai' then
     mode = '2560x1440@164.96',
     position = '1440x920',
     scale = 1,
+    icc = vars.hypr_dir .. 'misc/ultragear.icc'
   })
 
   hl.monitor({
@@ -11,6 +12,7 @@ if vars.hostname == 'kurenai' then
     mode = '2560x1440@164.96',
     position = '0x0',
     scale = 1,
+    icc = vars.hypr_dir .. 'misc/ultragear.icc',
     transform = 1,
   })
 

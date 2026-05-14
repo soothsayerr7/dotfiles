@@ -14,10 +14,11 @@ pkgs_common=(
   mesa vulkan-radeon
   gtk3 gtk4 qt5-wayland qt6-wayland adw-gtk-theme qt6ct
   alacritty nautilus nautilus-open-any-terminal helium-browser-bin
+  mpv-git imv
   xdg-user-dirs xdg-desktop-portal-gtk
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
   inter-font noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ttf-nerd-fonts-symbols
-  wl-clipboard cliphist jq grim slurp
+  wl-clipboard cliphist jq hyprshot handlr-regex
 )
 
 if command -v paru &> /dev/null; then
@@ -39,5 +40,5 @@ fi
 
 $helper -S "${pkgs[@]}"
 
-mkdir -p ~/downloads ~/documents ~/pictures ~/videos
+mkdir -p ~/downloads ~/documents ~/pictures/wallpapers ~/pictures/screenshots ~/videos
 xdg-user-dirs-update
