@@ -6,14 +6,15 @@ local dw  = hl.dsp.window
 local dws = hl.dsp.workspace
 local dg  = hl.dsp.group
 
-local SU = 'SUPER + '
-local SS = 'SUPER + SHIFT + '
-local SC = 'SUPER + CTRL + '
-local SA = 'SUPER + ALT + '
-local SX = 'SUPER + SHIFT + CTRL + '
-local SY = 'SUPER + CTRL + ALT +'
+local SUP = 'SUPER + '
+local SSH = 'SUPER + SHIFT + '
+local SCT = 'SUPER + CTRL + '
+local SAL = 'SUPER + ALT + '
+local SSC = 'SUPER + SHIFT + CTRL + '
+local SCA = 'SUPER + CTRL + ALT +'
 
 local flags = {
+  lp = { long_press = true },
   e  = { repeating = true },
   l  = { locked = true },
   el = { repeating = true, locked = true},
@@ -31,56 +32,58 @@ end
 
 local PT = 'panel-toggle '
 
-b(SU .. 'Space', noc_msg(PT .. 'launcher'))
-b(SU .. 'V',     noc_msg(PT .. 'clipboard'))
+b(SUP .. 'Space', noc_msg(PT .. 'launcher'))
+b(SUP .. 'V',     noc_msg(PT .. 'clipboard'))
 
-b(SU .. 'B', noc_msg('bar-toggle'))
+b(SUP .. 'B', noc_msg('bar-toggle'))
 
-b(SS .. 'Q', noc_msg(PT .. 'session'))
+b(SSH .. 'Q', noc_msg(PT .. 'session'))
+
+b(SUP .. 'delete', noc_msg('dpms-off'))
 
 b('XF86AudioRaiseVolume', noc_msg('volume-up'),   flags.el)
-b('XF86AudioLowerVolume', noc_msg('volume-down'),   flags.el)
+b('XF86AudioLowerVolume', noc_msg('volume-down'), flags.el)
 b('XF86AudioMute',        noc_msg('volume-mute'), flags.l)
 
-b('XF86MonBrightnessUp',   noc_msg('brightness-up'), flags.el)
+b('XF86MonBrightnessUp',   noc_msg('brightness-up'),   flags.el)
 b('XF86MonBrightnessDown', noc_msg('brightness-down'), flags.el)
 
 -- PROGRAMS
-b(SU .. 'T', d.exec_cmd(vars.terminal))
-b(SU .. 'W', d.exec_cmd(vars.browser))
-b(SU .. 'E', d.exec_cmd(vars.file_manager))
+b(SUP .. 'T', d.exec_cmd(vars.terminal))
+b(SUP .. 'W', d.exec_cmd(vars.browser))
+b(SUP .. 'E', d.exec_cmd(vars.file_manager))
 
 -- GENERAL
-b(SU .. 'Q', dw.close())
+b(SUP .. 'Q', dw.close())
 --
-b(SU .. 'A', dw.float({ action = 'toggle' }))
-b(SS .. 'A', dw.pin())
+b(SUP .. 'A', dw.float({ action = 'toggle' }))
+b(SSH .. 'A', dw.pin())
 
-b(SU .. 'X', dw.cycle_next())
+b(SUP .. 'X', dw.cycle_next())
 
-b(SU .. 'F', d.layout('colresize 1.0'))
-b(SS .. 'F', dw.fullscreen())
+b(SUP .. 'F', d.layout('colresize 1.0'))
+b(SSH .. 'F', dw.fullscreen())
 
-b(SU .. 'S', dws.toggle_special())
-b(SS .. 'S', dw.move({ workspace = 'special' }))
+b(SUP .. 'S', dws.toggle_special())
+b(SCT .. 'S', dw.move({ workspace = 'special' }))
 
-b(SS .. 'G', dg.toggle())
-b(SU .. 'G', dg.next())
-b(SX .. 'G', dg.lock())
+b(SSH .. 'G', dg.toggle())
+b(SUP .. 'G', dg.next())
+b(SSC .. 'G', dg.lock())
 
-b(SU .. 'N', dw.toggle_swallow())
+b(SUP .. 'N', dw.toggle_swallow())
 
-b(SU .. 'C', d.layout('fit all'))
+b(SUP .. 'C', d.layout('fit all'))
 
-b(SU .. 'R', d.layout('colresize -conf'))
+b(SUP .. 'R', d.layout('colresize -conf'))
 
-b(SU .. 'equal', d.layout('colresize +0.1'))
-b(SU .. 'minus', d.layout('colresize -0.1'))
+b(SUP .. 'equal', d.layout('colresize +0.1'))
+b(SUP .. 'minus', d.layout('colresize -0.1'))
 
-b(SU .. 'mouse:272', dw.drag(),   flags.m)
-b(SU .. 'mouse:273', dw.resize(), flags.m)
+b(SUP .. 'mouse:272', dw.drag(),   flags.m)
+b(SUP .. 'mouse:273', dw.resize(), flags.m)
 
-b(SY .. 'delete', d.exit())
+b(SCA .. 'delete', d.exit())
 
 -- SCREENSHOTS
 local function hyprshot(mode)
@@ -91,13 +94,13 @@ local function hyprshot(mode)
   end
 end
 
-b(SU .. 'P', hyprshot('region'))
-b(SS .. 'P', hyprshot('window'))
-b(SC .. 'P', hyprshot('output'))
-b(SX .. 'P', hyprshot('all'))
+b(SUP .. 'Z', hyprshot('region'))
+b(SSH .. 'Z', hyprshot('window'))
+b(SCT .. 'Z', hyprshot('output'))
+b(SSC .. 'Z', hyprshot('all'))
 
 local screenshot_fmt = 'screenshot_$(date +%Y-%m-%d_%H-%M-%S).png'
-b(SA .. 'P', d.exec_cmd('wl-paste > ' .. vars.screenshot_dir .. screenshot_fmt))
+b(SAL .. 'Z', d.exec_cmd('wl-paste > ' .. vars.screenshot_dir .. screenshot_fmt))
 
 -- DIRECTIONAL MOVEMENT
 local axes = {
@@ -107,31 +110,31 @@ local axes = {
 
 for axis, map in pairs(axes) do
   for key, dir in pairs(map) do
-    b(SU .. key, d.layout('focus ' .. dir))
-    b(SC .. key, exec_script('hypr-swap.sh ' .. dir))
+    b(SUP .. key, d.layout('focus ' .. dir))
+    b(SCT .. key, dw.swap({ direction = dir }))
 
     if axis == 'h' then
-      b(SS .. key, d.focus({ monitor = dir }))
-      b(SX .. key, dw.move({ monitor = dir }))
+      b(SSH .. key, d.focus({ monitor = dir }))
+      b(SSC .. key, dw.move({ monitor = dir }))
     end
 
     if axis == 'v' then
-      b(SS .. key, exec_script('hypr-workspace.sh focus ' .. dir))
-      b(SX .. key, exec_script('hypr-workspace.sh move ' .. dir))
+      b(SSH .. key, exec_script('vertical-workspaces.sh focus ' .. dir))
+      b(SSC .. key, exec_script('vertical-workspaces.sh move ' .. dir))
     end
   end
 end
 
-b(SU .. 'comma',  d.layout('consume_or_expel prev'))
-b(SU .. 'period', d.layout('consume_or_expel next'))
+b(SUP .. 'comma',  d.layout('consume_or_expel prev'))
+b(SUP .. 'period', d.layout('consume_or_expel next'))
 
 -- NUMBERED MOVEMENT
 for i = 1, 9 do
   local j = i + 10
   local key = tostring(i)
 
-  b(SU .. key, d.focus({ workspace = i }))
-  b(SS .. key, d.focus({ workspace = j }))
-  b(SC .. key, dw.move({ workspace = i }))
-  b(SX .. key, dw.move({ workspace = j }))
+  b(SUP .. key, d.focus({ workspace = i }))
+  b(SSH .. key, d.focus({ workspace = j }))
+  b(SCT .. key, dw.move({ workspace = i }))
+  b(SSC .. key, dw.move({ workspace = j }))
 end

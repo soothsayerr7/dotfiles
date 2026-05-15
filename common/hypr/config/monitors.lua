@@ -2,7 +2,7 @@ if vars.hostname == 'kurenai' then
   hl.monitor({
     output = 'DP-1',
     mode = '2560x1440@164.96',
-    position = '1440x920',
+    position = '1440x865',
     scale = 1,
     icc = vars.hypr_dir .. 'misc/ultragear.icc'
   })

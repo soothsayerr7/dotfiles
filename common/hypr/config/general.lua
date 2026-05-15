@@ -82,6 +82,8 @@ hl.config({
 
     font_family = vars.font,
 
+    key_press_enables_dpms = true,
+
     enable_swallow = true,
     swallow_regex  = '^' .. vars.terminal_class .. '$',
 
@@ -94,7 +96,7 @@ hl.config({
   },
 
   cursor = {
-    no_hardware_cursors = true,
+    no_hardware_cursors = 1,
   },
 
   scrolling = {
@@ -104,5 +106,10 @@ hl.config({
     wrap_swapcol = false,
 
     explicit_column_widths = '0.33333, 0.5',
+  },
+
+  ecosystem = {
+    no_update_news = true,
+    no_donation_nag = true,
   },
 })
