@@ -1,6 +1,8 @@
 local wr = hl.window_rule
 local lr = hl.layer_rule
 
+-- wr({ match = { class = "helium" }, scrolling_width = 1.0})
+
 -- lr({
 --   name = 'noctalia-blur',
 --   match = { namespace = 'noctalia-background-.*$' },

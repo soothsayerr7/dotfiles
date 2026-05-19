@@ -112,7 +112,7 @@ local axes = {
 for axis, map in pairs(axes) do
   for key, dir in pairs(map) do
     b(SUP .. key, d.layout('focus ' .. dir))
-    b(SCT .. key, dw.swap({ direction = dir }))
+    b(SCT .. key, exec_script('swap.sh ' .. dir))
 
     if axis == 'h' then
       b(SSH .. key, d.focus({ monitor = dir }))

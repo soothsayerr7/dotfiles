@@ -36,6 +36,7 @@ elseif vars.hostname == 'seiryu' then
     mode = '1920x1080@120.015',
     position = '0x0',
     scale = 1.2,
+    icc = vars.hypr_dir .. 'misc/ultragear.icc',
   })
 
   local wr = hl.workspace_rule
