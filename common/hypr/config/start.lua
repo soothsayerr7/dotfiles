@@ -1,3 +1,5 @@
+local exec = hl.exec_cmd
+
 local function exec_script(script, ...)
   local args = { ... }
 
@@ -8,12 +10,16 @@ local function exec_script(script, ...)
 
   local args_string = #args > 0 and (' ' .. table.concat(quoted_args, ' ')) or ''
 
-  hl.exec_cmd(vars.hypr_dir .. 'scripts/' .. script .. args_string)
+  exec(vars.hypr_dir .. 'scripts/' .. script .. args_string)
 end
 
 hl.on('hyprland.start', function () 
-  hl.exec_cmd('noctalia')
+  exec('noctalia')
 
   exec_script('gtk.sh', vars.font, vars.font_mono, vars.font_size, vars.terminal)
   exec_script('default-applications.sh')
+
+  if vars.hostname == 'kurenai' then
+    exec('openrgb --profile "off"')
+  end
 end)

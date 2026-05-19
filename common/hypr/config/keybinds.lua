@@ -63,6 +63,7 @@ b(SUP .. 'X', dw.cycle_next())
 
 b(SUP .. 'F', d.layout('colresize 1.0'))
 b(SSH .. 'F', dw.fullscreen())
+b(SAL .. 'F', exec_script('fullscreen.sh'))
 
 b(SUP .. 'S', dws.toggle_special())
 b(SCT .. 'S', dw.move({ workspace = 'special' }))
