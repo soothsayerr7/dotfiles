@@ -65,6 +65,7 @@ glyph = "menu-2"
 [widget.workspaces]
 display = "name"
 max_label_chars = 2
+hide_when_empty = true
 
 [widget.taskbar]
 only_active_workspace = true

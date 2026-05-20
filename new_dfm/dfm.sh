@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -e
 
 source helpers.sh
-
-dot_dir="$HOME/dotfiles/dots"
-cfg_dir="$HOME/dotfiles/cfg"
 
 logo() {
   msg
@@ -21,12 +18,31 @@ logo() {
   msg
 }
 
-dfm_sync() {
-  cd "$dot_dir"
+hostname=$(hostnamectl hostname)
 
-  for item in *; do
-    msg --info "Stowing $item"
-    stow -Rd "$dot_dir" -t "$cfg_dir" "$item"
+source_dir="$HOME/new_dfm/dots"
+target_dir="$HOME/new_dfm/cfg"
+
+dfm_sync() {
+  declare -A skip
+
+  skip["dfm"]=1
+  skip["home"]=1
+  skip["kurenai"]=1
+  skip["seiryu"]=1
+
+  for package_path in "$source_dir"/*; do
+    package=$(basename "$package_path")
+
+    if [[ -z "${skip[$package]}" ]]; then
+      msg --info "Linking $package..."
+
+      ln -sfn "$package_path" "$target_dir/$package"
+
+      if [[ -L "$target_dir/$package" ]]; then
+        msg --done "$package linked"
+      fi
+    fi
   done
 }
 

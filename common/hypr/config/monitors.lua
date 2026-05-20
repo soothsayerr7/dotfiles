@@ -22,8 +22,8 @@ if vars.hostname == 'kurenai' then
     local wsh = tostring(i)
     local wsv = tostring(i + 10)
 
-    wr({ workspace = wsh, default_name = 'H' .. tostring(i), monitor = 'DP-1', default = (i == 1) })
-    wr({ workspace = wsv, default_name = 'V' .. tostring(i), monitor = 'DP-2', default = (i == 1) })
+    wr({ workspace = wsh, default_name = 'H' .. tostring(i), monitor = 'DP-1', persistent = true, default = (i == 1) })
+    wr({ workspace = wsv, default_name = 'V' .. tostring(i), monitor = 'DP-2', persistent = true, default = (i == 1) })
   end
 
   wr({ workspace = 'r[11-19]', layout_opts = { direction = 'down' } })
@@ -42,6 +42,6 @@ elseif vars.hostname == 'seiryu' then
   local wr = hl.workspace_rule
 
   for i = 1, 9 do
-    wr({ workspace = tostring(i), default = (i == 1) })
+    wr({ workspace = tostring(i), default_name = 'H' .. tostring(i), persistent = true, default = (i == 1) })
   end
 end
