@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 source helpers.sh
 
@@ -18,38 +18,62 @@ logo() {
   msg
 }
 
-hostname=$(hostnamectl hostname)
+DOTFILES="$HOME/test_folder/dotfiles"
 
-source_dir="$HOME/new_dfm/dots"
-target_dir="$HOME/new_dfm/cfg"
+dfm_loop() {
+  local hostname=$(hostnamectl hostname)
+
+  local dirs=(
+    "$DOTFILES"
+    "$DOTFILES/@home"
+    "$DOTFILES/@$hostname"
+    "$DOTFILES/@$hostname/@home"
+  )
+
+  declare -ag DOT_PATHS
+
+  for dir in "${dirs[@]}"; do
+    [[ -d "$dir" ]] || continue
+
+    for path in "$dir"/*; do
+      [[ -e "$path" ]] || continue
+
+      local entry=$(basename "$path")
+
+      [[ "$entry" == @* ]] && continue
+
+      DOT_PATHS+=("$path")
+    done
+  done
+}
 
 dfm_sync() {
-  declare -A skip
+  dfm_loop
 
-  skip["dfm"]=1
-  skip["home"]=1
-  skip["kurenai"]=1
-  skip["seiryu"]=1
+  local home_dir="$HOME/test_folder"
+  local cfg_dir="$home_dir/config"
 
-  for package_path in "$source_dir"/*; do
-    package=$(basename "$package_path")
+  for path in "${DOT_PATHS[@]}"; do
+    local src_entry=$(basename "$path")
+    local tgt_entry="${src_entry/#dot-/.}"
 
-    if [[ -z "${skip[$package]}" ]]; then
-      msg --info "Linking $package..."
+    local rpath="${path#$DOTFILES/}"
+    msg --info "Linking $rpath..."
 
-      ln -sfn "$package_path" "$target_dir/$package"
-
-      if [[ -L "$target_dir/$package" ]]; then
-        msg --done "$package linked"
-      fi
+    if [[ "$rpath" == *@home* ]]; then
+      ln -sfn "$path" "$home_dir/$tgt_entry"
+    else
+      ln -sfn "$path" "$cfg_dir/$tgt_entry" 
     fi
   done
 }
 
+action=${1:-"sync"}
+
 main() {
   logo
 
-  case "${1:-}" in
+  case "$action" in
     "sync") dfm_sync ;;
   esac
 }
