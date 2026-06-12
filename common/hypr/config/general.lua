@@ -43,7 +43,7 @@ hl.config({
 
   input = {
     kb_layout  = 'us',
-    kb_variant = 'altgr-intl',
+    kb_variant = 'intl',
 
     numlock_by_default = true,
 
