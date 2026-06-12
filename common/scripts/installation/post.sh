@@ -11,7 +11,7 @@ pacman -S limine efibootmgr "${cpu}-ucode" git btrfs-progs networkmanager man-db
 ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime
 hwclock --systohc
 
-for locale in en_IE.UTF-8 en_DK.UTF-8 en_US.UTF-8; do
+for locale in en_IE.UTF-8 en_DK.UTF-8 en_US.UTF-8 pt_BR.UTF-8; do
   sed -i "/^#${locale}/s/^#//" /etc/locale.gen
 done
 
@@ -21,6 +21,7 @@ cat <<EOF > /etc/locale.conf
 LANG=en_IE.UTF-8
 LC_TIME=en_DK.UTF-8
 LC_MESSAGES=en_US.UTF-8
+LC_CTYPE=pt_BR.UTF-8
 EOF
 
 cat <<EOF > /etc/vconsole.conf
